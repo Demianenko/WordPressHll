@@ -1,5 +1,7 @@
 package Hill.pages;
 
+
+import Hill.util.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -33,6 +35,7 @@ public class LoginPage extends Page {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        Log.info("LoginPage create");
     }
 
 }

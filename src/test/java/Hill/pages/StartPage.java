@@ -1,5 +1,7 @@
 package Hill.pages;
 
+
+import Hill.util.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -57,5 +59,6 @@ public class StartPage extends Page {
 
     public StartPage(WebDriver webDriver) {
         super(webDriver);
+        Log.info("StartPage create");
     }
 }

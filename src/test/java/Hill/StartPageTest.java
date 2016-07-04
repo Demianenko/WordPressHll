@@ -1,12 +1,12 @@
 package Hill;
 
 import Hill.pages.LoginPage;
+import Hill.util.Log;
 import org.openqa.selenium.support.PageFactory;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import Hill.pages.StartPage;
 
@@ -15,6 +15,12 @@ public class StartPageTest extends TestNgTestBase {
     private StartPage wordPressStartPage;
     private LoginPage loginPage;
 
+    @BeforeTest
+    public void initTest(){
+        Log.startTestCase("WordPress");
+
+
+    }
     @BeforeMethod
     public void initPageObjects() {
         wordPressStartPage = PageFactory.initElements(driver, StartPage.class);
@@ -77,7 +83,11 @@ public class StartPageTest extends TestNgTestBase {
         wordPressStartPage.login.click();
         Assert.assertTrue(loginPage.title.equals(wordPressStartPage.header.getText()));
     }
-
+    @AfterTest
+    public void closeDriver() {
+        Log.endTestCase("WordPress");
+        driver.quit();
+    }
 
 
 }

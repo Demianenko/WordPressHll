@@ -3,6 +3,7 @@ package Hill;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import Hill.util.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Capabilities;
 
@@ -39,6 +40,7 @@ public class TestNgTestBase {
 
     @BeforeMethod
     public void initWebDriver() {
+        Log.info("Start driver init...");
         driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
