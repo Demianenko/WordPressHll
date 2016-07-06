@@ -41,12 +41,12 @@ public class LoginPageTest extends TestNgTestBase {
     @Test(dataProvider = "LoginPage", enabled = true)
     public void test(String name, String password) {
         loginPage.loginTo(name,password);
+        Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
     }
 
     @Test
     public void thereIsErrorMessage() {
         loginPage.loginTo("a","b");
-        System.out.println(loginPage.errorMessage.getText());
         Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
     }
 
