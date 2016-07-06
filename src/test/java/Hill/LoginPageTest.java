@@ -7,10 +7,7 @@ import Hill.util.ReaderFromXLSX;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 //import Hill.util.ReaderFromXLSX;
 
 /**
@@ -27,24 +24,38 @@ public class LoginPageTest extends TestNgTestBase {
     }
     @BeforeMethod
     public void initPageObjects() {
+        Log.info("Init page object");
         wordPressStartPage = PageFactory.initElements(driver, StartPage.class);
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         driver.get(baseUrl);
         wordPressStartPage.login.click();
     }
-    @Test
+    @Test(enabled = false)
     public void loginPageHasAHeader() {
         loginPage.wait.until(ExpectedConditions.textToBePresentInElement(loginPage.header,loginPage.title));
         Assert.assertTrue(loginPage.title.equals(loginPage.header.getText()));
     }
+    @DataProvider(name = "Addition", parallel = true)
+    public static Object[][] credentials() {
+        return new Object[][] { {"no","no"},{"NOOO","NOOO"}};
+    }
 
-    @Test(dataProvider = "LoginPage", enabled = true)
+    @Test(dataProvider = "new",dataProviderClass = ReaderFromXLSX.class)
     public void test(String name, String password) {
+        System.out.println(name+"  "+password);
+        Log.info("DATA PROVIDER");
         loginPage.loginTo(name,password);
         Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
     }
+    @Test(dataProvider = "Addition", enabled = false)
+    public void testBad(String name, String password) {
+        System.out.println(name+"  "+password);
+        Log.info("DATA PROVIDER");
+        //loginPage.loginTo(name,password);
+        //Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
+    }
 
-    @Test
+    @Test(enabled = false)
     public void thereIsErrorMessage() {
         loginPage.loginTo("a","b");
         Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
