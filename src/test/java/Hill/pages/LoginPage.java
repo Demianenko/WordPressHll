@@ -33,6 +33,22 @@ public class LoginPage extends Page {
     @CacheLookup
     public WebElement submitButton;
 
+    @FindBy(xpath = "//*[@id=\"login_error\"]")
+    @CacheLookup
+    public WebElement errorMessage;
+
+    public void loginTo(String name, String password) {
+        Log.info("Start LoginTo");
+        loginField.clear();
+        Log.info("Set Name");
+        loginField.sendKeys(name);
+        passwordField.clear();
+        Log.info("Set password");
+        passwordField.sendKeys(password);
+        Log.info("Click button");
+        submitButton.click();
+    }
+
     public LoginPage(WebDriver driver) {
         super(driver);
         Log.info("LoginPage create");
