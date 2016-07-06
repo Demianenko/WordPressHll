@@ -1,20 +1,17 @@
 package Hill;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import Hill.util.Log;
-import org.openqa.selenium.WebDriver;
+import Hill.util.PropertyLoader;
 import org.openqa.selenium.Capabilities;
-
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
 import ru.stqa.selenium.factory.WebDriverFactory;
 import ru.stqa.selenium.factory.WebDriverFactoryMode;
 
-import Hill.util.PropertyLoader;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Base class for TestNG-based test classes
@@ -42,7 +39,7 @@ public class TestNgTestBase {
     public void initWebDriver() {
         Log.info("Start driver init...");
         driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @AfterSuite(alwaysRun = true)

@@ -1,5 +1,6 @@
 package Hill.pages;
 
+import Hill.util.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,13 +21,14 @@ public abstract class Page {
      */
     public Page(WebDriver driver) {
         this.driver = driver;
-        wait =  new WebDriverWait(driver, 30);
+        wait =  new WebDriverWait(driver, 60);
     }
 
     public String getTitle() {
         return driver.getTitle();
     }
     public void moveToElement(WebElement element){
+        Log.info("Move to Element " + element.getText());
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
     }

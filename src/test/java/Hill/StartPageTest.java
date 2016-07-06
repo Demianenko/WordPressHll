@@ -18,8 +18,6 @@ public class StartPageTest extends TestNgTestBase {
     @BeforeTest
     public void initTest(){
         Log.startTestCase("WordPress");
-
-
     }
     @BeforeMethod
     public void initPageObjects() {
@@ -81,7 +79,8 @@ public class StartPageTest extends TestNgTestBase {
     @Test
     public void loginPageHasAHeader() {
         wordPressStartPage.login.click();
-        Assert.assertTrue(loginPage.title.equals(wordPressStartPage.header.getText()));
+        loginPage.wait.until(ExpectedConditions.textToBePresentInElement(loginPage.header,loginPage.title));
+        Assert.assertTrue(loginPage.title.equals(loginPage.header.getText()));
     }
     @AfterTest
     public void closeDriver() {
