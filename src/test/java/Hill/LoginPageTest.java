@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
-//import Hill.util.ReaderFromXLSX;
 
 /**
  * Created by user on 06.07.2016.
@@ -16,7 +15,6 @@ import org.testng.annotations.*;
 public class LoginPageTest extends TestNgTestBase {
     private StartPage wordPressStartPage;
     private LoginPage loginPage;
-    private ReaderFromXLSX read = new ReaderFromXLSX();
 
     @BeforeTest
     public void initTest(){
