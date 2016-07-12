@@ -49,11 +49,11 @@ public class LoginPageTest extends TestNgTestBase {
     public void testBad(String name, String password) {
         System.out.println(name+"  "+password);
         Log.info("DATA PROVIDER");
-        //loginPage.loginTo(name,password);
-        //Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
+        loginPage.loginTo(name,password);
+        Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void thereIsErrorMessage() {
         loginPage.loginTo("a","b");
         Assert.assertTrue(loginPage.errorMessage.getText().contains("ОШИБКА"));
