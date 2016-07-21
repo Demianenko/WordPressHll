@@ -1,7 +1,7 @@
-package Hill.pages;
+package hill.pages;
 
 
-import Hill.util.Log;
+import hill.util.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;

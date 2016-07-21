@@ -1,7 +1,7 @@
-package Hill;
+package hill;
 
-import Hill.util.Log;
-import Hill.util.PropertyLoader;
+import hill.util.Log;
+import hill.util.PropertyLoader;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;

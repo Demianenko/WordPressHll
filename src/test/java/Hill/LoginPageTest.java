@@ -1,9 +1,9 @@
-package Hill;
+package hill;
 
-import Hill.pages.LoginPage;
-import Hill.pages.StartPage;
-import Hill.util.Log;
-import Hill.util.ReaderFromXLSX;
+import hill.pages.LoginPage;
+import hill.pages.StartPage;
+import hill.util.Log;
+import hill.util.ReaderFromXLSX;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;

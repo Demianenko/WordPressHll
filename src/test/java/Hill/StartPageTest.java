@@ -1,14 +1,14 @@
-package Hill;
+package hill;
 
-import Hill.pages.LoginPage;
-import Hill.util.Log;
+import hill.pages.LoginPage;
+import hill.util.Log;
 import org.openqa.selenium.support.PageFactory;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import Hill.pages.StartPage;
+import hill.pages.StartPage;
 
 public class StartPageTest extends TestNgTestBase {
 
