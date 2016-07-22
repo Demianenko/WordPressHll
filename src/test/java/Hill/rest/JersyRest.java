@@ -4,6 +4,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.testng.Assert;
@@ -41,17 +42,27 @@ public class JersyRest extends JerseyTest {
         String actual = json.get("coord").toString();
         Assert.assertEquals(actual,"{\"lon\":-0.13,\"lat\":51.51}");
     }
-    @Test(enabled=true)
+    @Test(enabled=false)
     public void test2() throws JSONException {
-        String url = "https://wordpress.com";
-        String puth = "v1.1/sites/50525957/posts/";
+        String url = "https://public-api.wordpress.com/";
+        String puth = "rest/v1.1/sites/autocource.wordpress.com/posts/2/likes/";
+        Assert.assertEquals(foundReturn(url,puth,"found"),"1");
+        Assert.assertEquals(foundReturn(url,puth,"found"),"1");
+    }
+    private String foundReturn(String url, String puth, String value) throws JSONException {
         WebResource webResource = client().resource(url);
-        System.out.println(url);
-        System.out.println(puth);
         JSONObject json = webResource.path(puth).get(JSONObject.class);
-        //String actual = json.get("").toString();
-        String actual = json.toString();
+        JSONArray arr = (JSONArray) json.get(value);
+        JSONObject nJson = (JSONObject) arr.get(0);
+        String actual = nJson.get("content").toString();
         System.out.println(actual);
-        Assert.assertEquals(actual,"{\"lon\":-0.13,\"lat\":51.51}");
+        return actual;
+    }
+    @Test(enabled=true)
+    public void test3() throws JSONException {
+        String url = "https://public-api.wordpress.com/";
+        String puth = "rest/v1.1/sites/autocource.wordpress.com/posts";
+        Assert.assertTrue(foundReturn(url,puth,"posts").contains("test"));
     }
 }
+//https://public-api.wordpress.com/rest/v1.1/sites/$site/posts/$post_ID/likes/

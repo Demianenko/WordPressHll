@@ -1,5 +1,6 @@
 package hill;
 
+import hill.rest.JersyRest;
 import hill.util.Log;
 import hill.util.PropertyLoader;
 import org.openqa.selenium.Capabilities;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Base class for TestNG-based test classes
  */
-public class TestNgTestBase {
+public class TestNgTestBase extends JersyRest{
 
     protected static String gridHubUrl;
     protected static String baseUrl;
