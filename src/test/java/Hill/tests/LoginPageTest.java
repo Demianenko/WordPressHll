@@ -1,4 +1,4 @@
-package hill;
+package hill.tests;
 
 import hill.pages.LoginPage;
 import hill.pages.StartPage;

@@ -1,5 +1,7 @@
-package hill;
+package hill.tests;
 
+import com.sun.jersey.test.framework.AppDescriptor;
+import com.sun.jersey.test.framework.WebAppDescriptor;
 import hill.rest.JersyRest;
 import hill.util.Log;
 import hill.util.PropertyLoader;
@@ -21,9 +23,14 @@ public class TestNgTestBase extends JersyRest{
 
     protected static String gridHubUrl;
     protected static String baseUrl;
+    String urlApi = "https://public-api.wordpress.com/";
     protected static Capabilities capabilities;
-
     protected WebDriver driver;
+
+    @Override
+    protected AppDescriptor configure() {
+        return new WebAppDescriptor.Builder().build();
+    }
 
     @BeforeSuite
     public void initTestSuite() throws IOException {
