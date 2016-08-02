@@ -15,9 +15,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-/**
- * Created by user on 23.07.2016.
- */
 public class LikesFunk extends TestNgTestBase {
     private MainPage mainPage;
     private PostPage postPage;

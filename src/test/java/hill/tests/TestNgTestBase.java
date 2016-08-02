@@ -7,6 +7,7 @@ import hill.util.Log;
 import hill.util.PropertyLoader;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -46,7 +47,10 @@ public class TestNgTestBase extends JersyRest{
     @BeforeMethod
     public void initWebDriver() {
         Log.info("Start driver init...");
-        driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
+        System.setProperty("webdriver.chrome.driver", "/home/sega/Desktop/chromedriver");
+
+        driver = new ChromeDriver();
+        //driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
