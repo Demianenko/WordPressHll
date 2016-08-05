@@ -4,6 +4,8 @@ import com.sun.jersey.api.client.WebResource;
 import hill.pages.LoginPage;
 import hill.pages.MainPage;
 import hill.pages.PostPage;
+import hill.util.FileRead;
+import hill.util.FileWrite;
 import hill.util.Log;
 import net.thucydides.core.annotations.findby.By;
 import org.codehaus.jettison.json.JSONException;
@@ -14,6 +16,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+
 
 public class LikesFunk extends TestNgTestBase {
     private MainPage mainPage;
@@ -41,10 +46,10 @@ public class LikesFunk extends TestNgTestBase {
         System.out.println(mainPage.getTitle());
     }
 
-    @Test
+    @Test(enabled=false)
     public void checkLikes() throws InterruptedException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
-        Assert.assertEquals(foundReturn(urlApi,pathApi,"found"),"0");
+        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),"0");
         mainPage.postsList.get(0).click();
         postPage.wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath(postPage.likeFrame)));
         postPage.likeButton.click();
@@ -52,27 +57,53 @@ public class LikesFunk extends TestNgTestBase {
         postPage.switchToWindow(1);
         loginPage.loginTo("erlond@ya.ru","HillelCourse");
         Thread.sleep(2000);
-        Assert.assertEquals(foundReturn(urlApi,pathApi,"found"),"1");
+        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),"1");
         Thread.sleep(2000);
         postPage.switchToWindow(0);
         postPage.wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath(postPage.likeFrame)));
         postPage.likeButton.click();
         Thread.sleep(2000);
-        Assert.assertEquals(foundReturn(urlApi,pathApi,"found"),"0");
+        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),"0");
     }
 
     @Test(enabled=false)
     public void test3() throws JSONException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts";
-        Assert.assertTrue(foundReturn(urlApi,pathApi,"posts").contains("test"));
+        Assert.assertTrue(foundReturnString(urlApi,pathApi,"posts").contains("test"));
     }
     @Test(enabled=false)
     public void test4() throws JSONException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
-        System.out.println(foundReturn(urlApi,pathApi,"found") + " before click");
+        System.out.println(foundReturnString(urlApi,pathApi,"found") + " before click");
+    }
+    @Test(enabled=false)
+    public void testWriteJSON() throws JSONException, IOException {
+        String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
+        FileWrite.write(foundReturnJson(urlApi,pathApi,"found"));
+        JSONObject exept = FileRead.readJSON();
+        System.out.println(exept);
+        Assert.assertEquals(foundReturnJson(urlApi,pathApi,"found"),exept);
+
+    }
+    @Test(enabled=false)
+    public void testWrite() throws JSONException, IOException {
+        String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts";
+        FileWrite.write(foundReturnString(urlApi,pathApi,"posts"));
+        String exept = FileRead.read();
+        System.out.println(exept);
+        Assert.assertEquals(foundReturnString(urlApi,pathApi,"posts"),exept);
+
+    }
+    @Test(enabled=true)
+    public void newFile() throws IOException {
+        //Path layoutPath = Paths.get("resources/application.properties");
+        //String content = new String(Files.readAllBytes(layoutPath));
+        //System.out.println(content);
     }
 
-    private String foundReturn(String url, String puth, String value){
+
+
+    private String foundReturnString(String url, String puth, String value){
         String actual = "";
         try{
             WebResource webResource = client().resource(url);
@@ -83,5 +114,11 @@ public class LikesFunk extends TestNgTestBase {
             e.printStackTrace();
         }
         return actual;
+    }
+    private JSONObject foundReturnJson(String url, String puth, String value) throws JSONException {
+        WebResource webResource = client().resource(url);
+        JSONObject json = webResource.path(puth).get(JSONObject.class);
+        JSONObject result = (JSONObject)json.get(value);
+        return result;
     }
 }

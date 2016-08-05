@@ -7,9 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-/**
- * Created by sega on 26.07.16.
- */
 public class CreatePost extends TestNgTestBase {
     private StartPage startPage;
     private AdminPage adminPage;
