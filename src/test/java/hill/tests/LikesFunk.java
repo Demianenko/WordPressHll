@@ -4,8 +4,6 @@ import com.sun.jersey.api.client.WebResource;
 import hill.pages.LoginPage;
 import hill.pages.MainPage;
 import hill.pages.PostPage;
-import hill.util.FileRead;
-import hill.util.FileWrite;
 import hill.util.Log;
 import net.thucydides.core.annotations.findby.By;
 import org.codehaus.jettison.json.JSONException;
@@ -66,42 +64,12 @@ public class LikesFunk extends TestNgTestBase {
         Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),"0");
     }
 
-    @Test(enabled=false)
-    public void test3() throws JSONException {
-        String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts";
-        Assert.assertTrue(foundReturnString(urlApi,pathApi,"posts").contains("test"));
-    }
-    @Test(enabled=false)
-    public void test4() throws JSONException {
-        String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
-        System.out.println(foundReturnString(urlApi,pathApi,"found") + " before click");
-    }
-    @Test(enabled=false)
-    public void testWriteJSON() throws JSONException, IOException {
-        String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
-        FileWrite.write(foundReturnJson(urlApi,pathApi,"found"));
-        JSONObject exept = FileRead.readJSON();
-        System.out.println(exept);
-        Assert.assertEquals(foundReturnJson(urlApi,pathApi,"found"),exept);
-
-    }
-    @Test(enabled=false)
-    public void testWrite() throws JSONException, IOException {
-        String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts";
-        FileWrite.write(foundReturnString(urlApi,pathApi,"posts"));
-        String exept = FileRead.read();
-        System.out.println(exept);
-        Assert.assertEquals(foundReturnString(urlApi,pathApi,"posts"),exept);
-
-    }
     @Test(enabled=true)
     public void newFile() throws IOException {
         //Path layoutPath = Paths.get("resources/application.properties");
         //String content = new String(Files.readAllBytes(layoutPath));
         //System.out.println(content);
     }
-
-
 
     private String foundReturnString(String url, String puth, String value){
         String actual = "";
