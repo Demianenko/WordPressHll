@@ -42,21 +42,6 @@ public class RESTTest  extends TestNgTestBase {
         Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),exeptedJSON);
     }
 
-    @Test(enabled = false)
-    public void weatherTest() throws JSONException {
-        String path = "/data/2.5/weather";
-        String p1 ="APPID";
-        String v1 = "7405968f6a0106c84de31bcfec65e460";
-        String p2 ="q";
-        String v2 ="London";
-        WebResource webResource = client().resource(urlApiSinoptik);
-        JSONObject json = webResource.path(path).queryParam(p1,v1).queryParam(p2,v2).get(JSONObject.class);
-        JSONObject json1 = webResource.path(path).queryParam(p1,v1).queryParam(p2,v2).get(JSONObject.class).getJSONObject("coord");
-        String json2 = webResource.path(path).queryParam(p1,v1).queryParam(p2,v2).get(JSONObject.class).getString("name");
-        System.out.println(json);
-        System.out.println(json1);
-        System.out.println(json2);
-    }
 
 
     @Test(dataProvider = "getXLSX",dataProviderClass = DataProviders.class, enabled = true)
