@@ -19,29 +19,54 @@ public class RESTTest  extends TestNgTestBase {
     @Test(enabled=false)
     public void test3() throws JSONException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts";
-        Assert.assertTrue(foundReturnString(urlApi,pathApi,"posts").contains("test"));
+        Assert.assertTrue(foundReturnString(urlApiWordPress,pathApi,"posts").contains("test"));
     }
     @Test(enabled=false)
     public void test4() throws JSONException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
-        System.out.println(foundReturnString(urlApi,pathApi,"found") + " before click");
+        System.out.println(foundReturnString(urlApiWordPress,pathApi,"found") + " before click");
     }
     @Test(enabled=false)
     public void testWrite() throws JSONException, IOException {
         String pathApi = "/rest/v1.1/sites/autocource.wordpress.com/posts/";
-        FileWrite.write(foundReturnString(urlApi,pathApi,"found"));
+        FileWrite.write(foundReturnString(urlApiWordPress,pathApi,"found"));
         String exept = FileRead.read();
         System.out.println(exept);
-        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),exept);
+        Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),exept);
 
     }
-    @Test(dataProvider = "getJson",dataProviderClass = DataProviders.class, enabled = true)
+    @Test(dataProvider = "getJson",dataProviderClass = DataProviders.class, enabled = false)
     @DataSource(json = "src/test/resources/test.txt")
     public void fromDataProvider(String exeptedJSON) throws JSONException, IOException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts";
-        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),exeptedJSON);
+        Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),exeptedJSON);
     }
 
+    @Test(enabled = false)
+    public void weatherTest() throws JSONException {
+        String path = "/data/2.5/weather";
+        String p1 ="APPID";
+        String v1 = "7405968f6a0106c84de31bcfec65e460";
+        String p2 ="q";
+        String v2 ="London";
+        WebResource webResource = client().resource(urlApiSinoptik);
+        JSONObject json = webResource.path(path).queryParam(p1,v1).queryParam(p2,v2).get(JSONObject.class);
+        JSONObject json1 = webResource.path(path).queryParam(p1,v1).queryParam(p2,v2).get(JSONObject.class).getJSONObject("coord");
+        String json2 = webResource.path(path).queryParam(p1,v1).queryParam(p2,v2).get(JSONObject.class).getString("name");
+        System.out.println(json);
+        System.out.println(json1);
+        System.out.println(json2);
+    }
+
+
+    @Test(dataProvider = "getXLSX",dataProviderClass = DataProviders.class, enabled = true)
+    @DataSource(xlsx = "src/test/resources/testXLSX.xlsx")
+    public void weatherTestProvider(String path, String p1, String v1, String p2, String v2, String question, String exceptedResult) throws JSONException {
+        WebResource webResource = client().resource(urlApiSinoptik);
+        String actualResult = webResource.path(path).queryParam(p1,v1).queryParam(p2,v2).get(JSONObject.class).getString(question);
+        System.out.println("request = " + v2 + "  " + "actualResult = " + actualResult);
+        Assert.assertEquals(actualResult,exceptedResult);
+    }
 
 
 

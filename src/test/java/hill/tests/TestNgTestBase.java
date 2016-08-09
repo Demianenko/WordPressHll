@@ -23,7 +23,8 @@ public class TestNgTestBase extends JersyRest{
 
     protected static String gridHubUrl;
     protected static String baseUrl;
-    String urlApi = "https://public-api.wordpress.com/";
+    String urlApiWordPress = "https://public-api.wordpress.com/";
+    String urlApiSinoptik = "http://api.openweathermap.org";
     protected static Capabilities capabilities;
     protected WebDriver driver;
 

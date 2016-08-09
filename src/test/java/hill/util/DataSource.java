@@ -16,5 +16,6 @@ public @interface DataSource {
 
         public String xls() default "";
         public String json() default "";
+        public String xlsx() default "";
 
 }

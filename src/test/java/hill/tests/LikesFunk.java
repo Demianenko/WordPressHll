@@ -47,7 +47,7 @@ public class LikesFunk extends TestNgTestBase {
     @Test(enabled=false)
     public void checkLikes() throws InterruptedException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
-        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),"0");
+        Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),"0");
         mainPage.postsList.get(0).click();
         postPage.wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath(postPage.likeFrame)));
         postPage.likeButton.click();
@@ -55,13 +55,13 @@ public class LikesFunk extends TestNgTestBase {
         postPage.switchToWindow(1);
         loginPage.loginTo("erlond@ya.ru","HillelCourse");
         Thread.sleep(2000);
-        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),"1");
+        Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),"1");
         Thread.sleep(2000);
         postPage.switchToWindow(0);
         postPage.wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath(postPage.likeFrame)));
         postPage.likeButton.click();
         Thread.sleep(2000);
-        Assert.assertEquals(foundReturnString(urlApi,pathApi,"found"),"0");
+        Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),"0");
     }
 
     @Test(enabled=true)
