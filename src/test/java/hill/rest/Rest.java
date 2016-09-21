@@ -23,22 +23,12 @@ import java.util.List;
 public class Rest {
     public static void main(String[] args)  {
         String address = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=7405968f6a0106c84de31bcfec65e460";
-        String p1 ="https://service-amsup.lab.nordigy.ru/phonedevices/confirm.asp?";
-        String p2 ="SS_ID=4045";
-        String p3 ="&PO=080304153246|401836436006";
-        String p4 ="&SN=CBT43500J5";
-        String p5 ="&TN=323456789987456";
-        String p6 ="&LINE_NUM=800589958006";
-        address = p1+p2+p3+p4+p5+p6;
         address = "https://wordpress.com/v1.1/sites/50525957/users";
-
-
         try {
             get(address);
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void get(String address) throws IOException, URISyntaxException {

@@ -26,7 +26,7 @@ public class JersyRest extends JerseyTest {
         System.out.println(actual);
         Assert.assertEquals(actual,"Itanagar");
     }
-    @Test(enabled=false)
+    @Test(enabled=true)
     public void test1() throws JSONException {
         String url = "http://api.openweathermap.org";
         String puth = "/data/2.5/weather";
@@ -44,4 +44,3 @@ public class JersyRest extends JerseyTest {
 
 
 }
-//https://public-api.wordpress.com/rest/v1.1/sites/$site/posts/$post_ID/likes/
