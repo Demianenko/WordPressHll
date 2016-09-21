@@ -70,4 +70,31 @@ public class DataProviders {
         };
         return dp.iterator();
     }
+    @DataProvider(name = "getDataForLoginInToWordPress")
+    public static Iterator<Object[]> loginData(Method m) throws ParseException, IOException {
+        DataSource sourceAnnotation = m.getAnnotation(DataSource.class);
+        final String xlsx = sourceAnnotation.xlsx();
+        XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(xlsx));
+        final XSSFSheet sheet = myExcelBook.getSheetAt(0);
+
+        Collection<Object[]> dp = new ArrayList<Object[]>() {
+            {
+                int leighOfAnswer = 2;
+                int totalNoOfRows = sheet.getLastRowNum() + 1;
+                for (int i= 0 ; i < totalNoOfRows; i++) {
+                    Row row = sheet.getRow(i);
+                    String[] objects = new String[leighOfAnswer];
+                    for (int j = 0; j < leighOfAnswer; j++){
+                        Cell cell = row.getCell(j);
+                        cell.setCellType(1);
+                        objects[j] = cell.getStringCellValue();
+                    }
+                    add(objects);
+                }
+            }
+        };
+        return dp.iterator();
+    }
 }
+
+

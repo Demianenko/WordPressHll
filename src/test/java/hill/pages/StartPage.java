@@ -17,7 +17,7 @@ public class StartPage extends Page {
     @CacheLookup
     public WebElement header;
 
-    @FindBy(xpath = "//*[@class=\"click-wpcom-login\"]")
+    @FindBy(xpath = "//*[@class=\"login-link\"]")
     @CacheLookup
     public WebElement login;
     public String loginColorBefore = "rgba(0, 0, 0, 0)";

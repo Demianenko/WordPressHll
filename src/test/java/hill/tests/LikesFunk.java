@@ -15,8 +15,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-
 
 public class LikesFunk extends TestNgTestBase {
     private MainPage mainPage;
@@ -34,9 +32,7 @@ public class LikesFunk extends TestNgTestBase {
         postPage = PageFactory.initElements(driver, PostPage.class);
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         baseUrl = "https://autocource.wordpress.com/";
-        //driver.get("http://UserName:Password@Example.com");
-        driver.get("http://erlond@ya.ru:HillelCourse@autocource.wordpress.com/");
-        //driver.get(baseUrl);
+        driver.get(baseUrl);
     }
 
     @Test(enabled = false)
@@ -44,7 +40,7 @@ public class LikesFunk extends TestNgTestBase {
         System.out.println(mainPage.getTitle());
     }
 
-    @Test(enabled=false)
+    @Test(enabled=true)
     public void checkLikes() throws InterruptedException {
         String pathApi = "rest/v1.1/sites/autocource.wordpress.com/posts/4/likes/";
         Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),"0");
@@ -64,12 +60,6 @@ public class LikesFunk extends TestNgTestBase {
         Assert.assertEquals(foundReturnString(urlApiWordPress,pathApi,"found"),"0");
     }
 
-    @Test(enabled=true)
-    public void newFile() throws IOException {
-        //Path layoutPath = Paths.get("resources/application.properties");
-        //String content = new String(Files.readAllBytes(layoutPath));
-        //System.out.println(content);
-    }
 
     private String foundReturnString(String url, String puth, String value){
         String actual = "";

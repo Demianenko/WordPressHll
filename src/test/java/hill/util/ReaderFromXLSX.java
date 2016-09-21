@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ReaderFromXLSX {
     @DataProvider(name = "new")
     public static Object[][] readFromExcel() throws IOException {
-        XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream("D:\\07\\test.xlsx"));
+        XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream("src\\test\\resources\\dataForLogin.xlsx"));
         XSSFSheet sheet = myExcelBook.getSheetAt(0);
         int totalNoOfRows = sheet.getLastRowNum() + 1;
         String[][] arrayExcelData = new String[totalNoOfRows][2];
