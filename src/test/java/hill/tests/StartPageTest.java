@@ -31,7 +31,7 @@ public class StartPageTest extends TestNgTestBase {
         Assert.assertTrue(wordPressStartPage.title.equals(wordPressStartPage.header.getText()));
     }
 
-    @Test
+    @Test(enabled = false)
     public void startPageLoginColor() {
         Assert.assertTrue(wordPressStartPage.login.getCssValue("background").contains(wordPressStartPage.loginColorBefore));
         wordPressStartPage.moveToElement(wordPressStartPage.login);
